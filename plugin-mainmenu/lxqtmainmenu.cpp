@@ -176,7 +176,10 @@ void LXQtMainMenu::showMenu()
     willShowWindow(mMenu);
     // Just using Qt`s activateWindow() won't work on some WMs like Kwin.
     // Solution is to execute menu 1ms later using timer
-    mMenu->popup(calculatePopupWindowPos(mMenu->sizeHint()).topLeft());
+	mMenu->adjustSize();
+	mMenu->setGeometry(calculatePopupWindowPos(mMenu->sizeHint()));
+	willShowWindow(mMenu);
+	mMenu->show();
     if (mFilterMenu || mFilterShow)
     {
         //Note: part of the workadound for https://bugreports.qt.io/browse/QTBUG-52021
